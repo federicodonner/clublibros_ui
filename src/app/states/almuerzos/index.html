@@ -1,0 +1,24 @@
+<div class="section">
+  <h1 class="section-title">Almuerzos</h1>
+  <p>Cada día ofrecemos almuerzos balanceados. El menú cambia semanalmente para garantizar la variedad en los ingredientes y aportes nutricionales. </p>
+  <p>Se ofrecen en dos tamaños con un precio de ${{data.almuerzoEstaSemana.price_s}} y ${{data.almuerzoEstaSemana.price_l}}.</p>
+  <p>Para solicitar el almuerzo alcanza con enviar un mensaje de Whatsapp al <strong>+598 95 104 017</strong>. </p>
+</div>
+
+<div class="section">
+  <h1 class="section-title">Menú - semana {{data.almuerzoEstaSemana.mondayDate}}/{{data.almuerzoEstaSemana.mondayMonth}} al {{data.almuerzoEstaSemana.fridayDate}}/{{data.almuerzoEstaSemana.fridayMonth}}</h1>
+  <div><strong> Lunes: </strong> {{data.almuerzoEstaSemana.menuMonday}}</div>
+  <div><strong> Martes: </strong> {{data.almuerzoEstaSemana.menuTuesday}}</div>
+  <div><strong> Miércoles: </strong> {{data.almuerzoEstaSemana.menuWednesday}}</div>
+  <div><strong> Jueves: </strong> {{data.almuerzoEstaSemana.menuThursday}}</div>
+  <div><strong> Viernes: </strong> {{data.almuerzoEstaSemana.menuFriday}}</div>
+</div>
+
+<div class="section">
+  <h1 class="section-title">Menú - semana {{data.almuerzoProximaSemana.mondayDate}}/{{data.almuerzoProximaSemana.mondayMonth}} al {{data.almuerzoProximaSemana.fridayDate}}/{{data.almuerzoProximaSemana.fridayMonth}}</h1>
+  <div><strong> Lunes: </strong> {{data.almuerzoProximaSemana.menuMonday}}</div>
+  <div><strong> Martes: </strong> {{data.almuerzoProximaSemana.menuTuesday}}</div>
+  <div><strong> Miércoles: </strong> {{data.almuerzoProximaSemana.menuWednesday}}</div>
+  <div><strong> Jueves: </strong> {{data.almuerzoProximaSemana.menuThursday}}</div>
+  <div><strong> Viernes: </strong> {{data.almuerzoProximaSemana.menuFriday}}</div>
+</div>

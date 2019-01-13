@@ -1,0 +1,13 @@
+<div class="section">
+  <h1 class="section-title">Productos</h1>
+  <p>En todos nuestros liceos ofrecemos varidos productos para meriendas y en algunos de ellos también almuerzos. Estas son algunas de las opciones. </p>
+</div>
+<div class="section responsive-centrable">
+  <h1 class="section-title">Meriendas</h1>
+  <div class="product_item" ng-repeat="product in data.products track by $index">
+    <div><strong>{{product.name}}</strong> - ${{product.price}}</div>
+    {{product.description}}
+    <div class="product_image" ng-style="{'background-image':'url('+data.picturesUrl+'/'+product.picture+')'}"></div>
+    <br/>
+  </div>
+</div>

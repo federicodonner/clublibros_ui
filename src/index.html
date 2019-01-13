@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="amerendar">
+<head>
+  <meta charset=utf-8 />
+  <title>A merendar</title>
+
+  <meta name="robots" content="noindex">
+  <meta name="googlebot" content="noindex">
+
+  <!-- <link rel="stylesheet" href="css/styles.css" /> -->
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/font-awesome-min.css" />
+
+  <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&amp;subset=latin-ext" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+</head>
+
+<body>
+
+
+  <div class="app-view cover" data-header="true">
+    <div id="header">
+      <div class="bar"></div>
+      <div class="top">
+        <div class="logo"></div>
+        <nav-bar></nav-bar>
+      </div>
+    </div>
+
+    <div class="scrollable">
+      <div class="content">
+        <ui-view></ui-view>
+      </div>
+      <div class="footer">
+        <img src="images/banner_footer.jpg" class="banner-footer"/>
+        <div class="green">
+          <span class="copyright">A Merendar - 2019</span></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="scripts/angular/angular.min.js"></script>
+  <script src="scripts/angular-ui-router/release/angular-ui-router.min.js"></script>
+  <script src="scripts/angular-resource/angular-resource.js"></script>
+  <script src="scripts/angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCCzkuhNWIAgJ6Uohlch1iq7f3ebyTWws&callback=angular.noop"></script>
+
+  <script src="app/configuration/configuration.js"></script>
+  <script src="app/app.js"></script>
+
+  <script src="app/shared/factories/configurationResource.js"></script>
+  <script src="app/shared/factories/productsResource.js"></script>
+  <script src="app/shared/factories/almuerzosResource.js"></script>
+
+  <script src="app/shared/services/serverService.js"></script>
+  <script src="app/shared/services/sessionService.js"></script>
+
+  <script src="app/shared/directives/navBar/navBar.js"></script>
+  <script src="app/shared/directives/navBar/navBarService.js"></script>
+  <script src="app/shared/directives/imageLoader/imageLoader.js"></script>
+
+  <script src="app/states/home/homeController.js"></script>
+  <script src="app/states/home/homeService.js"></script>
+
+  <script src="app/states/situacion/situacionController.js"></script>
+  <script src="app/states/situacion/situacionService.js"></script>
+
+  <script src="app/states/locations/locationsController.js"></script>
+  <script src="app/states/locations/locationsService.js"></script>
+
+  <script src="app/states/products/productsController.js"></script>
+  <script src="app/states/products/productsService.js"></script>
+
+  <script src="app/states/almuerzos/almuerzosController.js"></script>
+  <script src="app/states/almuerzos/almuerzosService.js"></script>
+
+  <script src="app/states/contact/contactController.js"></script>
+  <script src="app/states/contact/contactService.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+  "systemParams": "darwin-x64-59",
+  "modulesFolders": [
+    "src/scripts"
+  ],
+  "flags": [],
+  "linkedModules": [],
+  "topLevelPatterns": [
+    "angular-local-storage@^0.7.1",
+    "angular-resource@^1.6.9",
+    "angular-ui-router@^1.0.3",
+    "angular@^1.6.9"
+  ],
+  "lockfileEntries": {
+    "@uirouter/core@5.0.3": "https://registry.yarnpkg.com/@uirouter/core/-/core-5.0.3.tgz#e2b5b1e45190e20c67ba4e15c013de5d4e0ccab3",
+    "angular-local-storage@^0.7.1": "https://registry.yarnpkg.com/angular-local-storage/-/angular-local-storage-0.7.1.tgz#fbd2730763c29fa9af5725e0186c780621e8cdd2",
+    "angular-resource@^1.6.9": "https://registry.yarnpkg.com/angular-resource/-/angular-resource-1.6.9.tgz#d02334b7cb96353e245966ad044c0c673df7b685",
+    "angular-ui-router@^1.0.3": "https://registry.yarnpkg.com/angular-ui-router/-/angular-ui-router-1.0.3.tgz#bf2494caae95c37cf01af3761d89747cfed2db45",
+    "angular@^1.6.9": "https://registry.yarnpkg.com/angular/-/angular-1.6.9.tgz#bc812932e18909038412d594a5990f4bb66c0619"
+  },
+  "files": [],
+  "artifacts": {}
+}
