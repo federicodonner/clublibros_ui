@@ -3,7 +3,7 @@ body {
 }
 
 .scrollable {
-  background-image: url("../../public/images/bgpattern.jpg");
+  background-image: url("../images/bgpattern.jpg");
   background-repeat-y: repeat;
   background-repeat-x: no-repeat;
   background-size: contain;
@@ -12,7 +12,6 @@ body {
 }
 
 .header {
-  background-image: url(../../public/images/bggradient.jpg);
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
@@ -21,14 +20,25 @@ body {
   padding-top: 7%;
 }
 
+.withGradient {
+  background-image: url("../images/bggradient.jpg");
+}
+
 .logo {
-  background-image: url(../../public/images/logoSmallBlack.png);
   width: 38%;
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
   margin-left: auto;
   margin-right: auto;
+}
+
+.blackLogo {
+  background-image: url("../images/logoSmallBlack.png");
+}
+
+.whiteLogo {
+  background-image: url("../images/logoSmallWhite.png");
 }
 
 .logo:before {
@@ -163,6 +173,7 @@ button {
 }
 
 .cover,
+#main,
 html,
 body {
   width: 100%;
@@ -238,7 +249,7 @@ padding-bottom: 100%;
   margin-left: -20px;
   background-size: 40px 40px;
   background-repeat: no-repeat;
-  background-image: url(../images/loader_white.jpg);
+  /* background-image: url(../images/loader_white.jpg); */
 }
 
 .image.loading::after {
@@ -327,18 +338,6 @@ padding-bottom: 100%;
 
 .lista li {
   margin: 0 0 5px 0;
-}
-
-.lista-pera {
-  list-style-image: url("../images/lista_manzana.jpg");
-}
-
-.lista-banana {
-  list-style-image: url("../images/lista_banana.jpg");
-}
-
-.lista-naranja {
-  list-style-image: url("../images/lista_naranja.jpg");
 }
 
 @keyframes rotate {
