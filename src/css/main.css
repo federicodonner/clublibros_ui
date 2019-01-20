@@ -15,9 +15,10 @@ body {
   background-repeat: no-repeat;
   background-size: contain;
   width: 100%;
-  height: 129%;
+  height: 121%;
   text-align: center;
   padding-top: 7%;
+  margin-bottom: -106vh;
 }
 
 .withGradient {
@@ -50,6 +51,56 @@ body {
 
 .blue {
   color: #3a506b;
+}
+
+.content {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.content p {
+  color: white;
+  font-weight: 600;
+  padding-left: 6%;
+  padding-right: 6%;
+  margin-bottom: 30px;
+}
+.content p .reviewText {
+  display: block;
+}
+
+.content p .rentalDates {
+  display: block;
+  font-size: 7pt;
+}
+
+.content a,
+.content a:visited,
+.content a:hover,
+.content a:active {
+  text-decoration: none;
+  color: #c1c1c2;
+}
+
+.hidden {
+  display: none;
+}
+
+.prettyForm {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 30px;
+}
+
+.prettyForm .formField {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.prettyForm input {
+  width: 55%;
 }
 
 html,
@@ -157,19 +208,6 @@ p {
 
 strong {
   font-weight: 700;
-}
-
-input,
-textarea,
-select,
-button {
-  border: none;
-  outline: none;
-  resize: none;
-  border-radius: 0;
-  background-color: transparent;
-  padding: 0;
-  margin: 0;
 }
 
 .cover,
@@ -282,12 +320,6 @@ padding-bottom: 100%;
   margin-bottom: 5px;
 }
 
-.content {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .title {
   margin-bottom: 20px;
 }
@@ -313,22 +345,10 @@ padding-bottom: 100%;
   padding-bottom: 76%;
 }
 
-.content {
-  width: 900px;
-}
-
-.content .section {
-  margin-bottom: 30px;
-}
-
 .section-title {
   font-size: 18pt;
   margin-bottom: 12px;
   color: #00928f;
-}
-
-.content p {
-  margin-bottom: 10px;
 }
 
 .banner {
@@ -377,10 +397,6 @@ padding-bottom: 100%;
   display: inline;
   float: left;
   margin-right: 30px;
-}
-
-.content .section.liceo {
-  height: 240px;
 }
 
 .form-label {
@@ -435,11 +451,6 @@ padding-bottom: 100%;
 
 /* RESPONSIVE */
 @media only screen and (max-width: 1000px) {
-  .content {
-    width: 90%;
-    line-height: 1.4;
-  }
-
   .responsive-centrable {
     text-align: center;
   }

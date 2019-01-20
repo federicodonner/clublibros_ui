@@ -6,10 +6,15 @@ const Header = props => {
   const headerClasses = classNames("header", {
     withGradient: props.withGradient
   });
+  const greetingClasses = classNames("greeting", {
+    hidden: !props.withGreeting
+  });
   return (
     <div className={headerClasses}>
-      <div className={logoClasses} />
-      <div className="greeting">
+      <a href="/">
+        <div className={logoClasses} />
+      </a>
+      <div className={greetingClasses}>
         Hola, <span className="blue">Federico Donner</span>
       </div>
     </div>
