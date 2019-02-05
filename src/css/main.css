@@ -42,6 +42,10 @@ body {
   background-image: url("../images/logoSmallWhite.png");
 }
 
+.whiteGreeting {
+  color: white;
+}
+
 .logo:before {
   content: "";
   display: block;
@@ -76,12 +80,34 @@ body {
   font-size: 7pt;
 }
 
-.content a,
-.content a:visited,
-.content a:hover,
-.content a:active {
+.content p.marginTop {
+  margin-top: 40px;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
   text-decoration: none;
   color: #c1c1c2;
+}
+
+ul.usuarios li,
+ul.libros li {
+  margin-bottom: 15px;
+}
+
+.usuarios {
+  list-style: none;
+  margin-left: -26px;
+  font-weight: 600;
+}
+
+.libros {
+  list-style: none;
+  margin-left: -26px;
+  color: white;
+  font-weight: 600;
 }
 
 .hidden {
@@ -101,6 +127,10 @@ body {
 
 .prettyForm input {
   width: 55%;
+}
+
+.newLine {
+  display: block;
 }
 
 html,

@@ -1,68 +1,159 @@
 import React from "react";
 import Header from "./Header";
+import BookName from "./BookName";
+import { verifyLogin, fetchUser } from "../fetchFunctions";
+import { convertDate } from "../dataFunctions";
 
-const User = props => {
-  const theUser = {
-    name: "Daniel Marotta",
-    currentRental: {
-      name: "Drive",
-      author: "Daniel Pink",
-      since: 123455
-    },
-    pastRentals: [
-      {
-        name: "Drive",
-        author: "Daniel Pink",
-        hasReview: false,
-        startDate: 123456,
-        endDate: 123456
-      },
-      {
-        name: "The House of Leaves",
-        author: "Mark Z. Danielewski",
-        hasReview: true,
-        startDate: 123456,
-        endDate: 123456
-      },
-      {
-        name: "The Universe in a Nutshell",
-        author: "Stephen Hawkings",
-        hasReview: false,
-        startDate: 123456,
-        endDate: 123456
-      }
-    ]
+class User extends React.Component {
+  state: {
+    user: {},
+    selectedUser: {}
   };
-  return (
-    <div className="app-view cover">
-      <div className="scrollable">
-        <Header logoType="blackLogo" withGradient={true} withGreeting={true} />
-        <div className="content">
-          <p>
-            {theUser.name} tiene un libro tuyo:{" "}
-            <a href="/book/1"> {theUser.currentRental.name}</a> desde
-            01/01/2019. - <a href="#">Pedile que lo devuelva</a>
-          </p>
-          <p>Historial de alquileres de {theUser.name}</p>
-          <p>
-            <a href="/book/1">{theUser.pastRentals[0].name}</a>{" "}
-            {theUser.pastRentals[0].author}
-            <span className="rentalDates">Del 01/01/2019 al 31/01/2019</span>
-          </p>
-          <p>
-            <a href="/book/1">{theUser.pastRentals[1].name}</a> -{" "}
-            {theUser.pastRentals[1].author}
-            <span className="rentalDates">Del 01/01/2019 al 31/01/2019</span>
-          </p>
-          <p>
-            <a href="/book/1">{theUser.pastRentals[2].name}</a> -{" "}
-            {theUser.pastRentals[2].author}
-            <span className="rentalDates">Del 01/01/2019 al 31/01/2019</span>
-          </p>
+
+  componentDidMount() {
+    const user = verifyLogin();
+    if (user) {
+      this.setState({ user }, function() {
+        fetchUser(this.state.user.token, this.props.match.params.id)
+          .then(res => res.json())
+          .then(selectedUser => this.setState({ selectedUser }));
+      });
+    } else {
+      this.props.history.push({
+        pathname: "/userselect"
+      });
+    }
+  }
+
+  render() {
+    return (
+      <div className="app-view cover">
+        <div className="scrollable">
+          {this.state && this.state.user && (
+            <Header
+              logoType="blackLogo"
+              withGreeting={true}
+              logoType="whiteLogo"
+              username={this.state.user.username}
+            />
+          )}
+          <div className="content">
+            {this.state && !this.state.selectedUser && (
+              <p>
+                <img src="/images/loader.gif" />
+              </p>
+            )}
+            {this.state && this.state.selectedUser && (
+              <>
+                {this.state.selectedUser.alquilerActivo &&
+                  this.state.selectedUser.alquilerActivo.id_dueno ==
+                    this.state.user.user_id && (
+                    <p>
+                      {this.state.selectedUser.nombre} tiene un libro tuyo:{" "}
+                      <BookName
+                        id={this.state.selectedUser.alquilerActivo.id_libro}
+                        name={
+                          this.state.selectedUser.alquilerActivo.nombre_libro
+                        }
+                        navigation={this.props.history}
+                      />{" "}
+                      desde{" "}
+                      {convertDate(
+                        this.state.selectedUser.alquilerActivo.fecha_salida
+                      )}
+                      .
+                      <span className="newLine">
+                        <a href="#">Pedile que lo devuelva</a>
+                      </span>
+                    </p>
+                  )}
+
+                {this.state.selectedUser.alquilerActivo &&
+                  this.state.selectedUser.alquilerActivo.id_dueno !=
+                    this.state.user.user_id && (
+                    <p>
+                      {this.state.selectedUser.nombre} tiene{" "}
+                      <BookName
+                        id={this.state.selectedUser.alquilerActivo.id_libro}
+                        name={
+                          this.state.selectedUser.alquilerActivo.nombre_libro
+                        }
+                        navigation={this.props.history}
+                      />{" "}
+                      desde{" "}
+                      {convertDate(
+                        this.state.selectedUser.alquilerActivo.fecha_salida
+                      )}
+                      .
+                    </p>
+                  )}
+
+                {this.state.selectedUser.alquileres.length == 0 &&
+                  !this.state.selectedUser.alquilerActivo && (
+                    <p>
+                      {this.state.selectedUser.nombre} todavía no se llevó
+                      ningún libro. ¡Recomendale alguno!
+                    </p>
+                  )}
+                {this.state.selectedUser.alquileres.length != 0 && (
+                  <>
+                    <p>{this.state.selectedUser.nombre} leyó estos libros:</p>
+
+                    <ul className="libros">
+                      {this.state.selectedUser.alquileres.map(obj => {
+                        return (
+                          <li key={obj.id}>
+                            <p>
+                              <BookName
+                                id={obj.id_libro}
+                                name={obj.nombre_libro}
+                                navigation={this.props.history}
+                              />{" "}
+                              - {obj.autor_libro}
+                              <span className="rentalDates">
+                                Del {convertDate(obj.fecha_salida)} al{" "}
+                                {convertDate(obj.fecha_devolucion)}
+                              </span>
+                            </p>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+
+                {this.state.selectedUser.libros.length == 0 && (
+                  <p>{this.state.selectedUser.nombre} no trajo ningún libro.</p>
+                )}
+
+                {this.state.selectedUser.libros.length != 0 && (
+                  <>
+                    <p>{this.state.selectedUser.nombre} trajo estos libros:</p>
+                    <ul className="libros">
+                      {this.state.selectedUser.libros.map(obj => {
+                        return (
+                          <li key={obj.id}>
+                            <p>
+                              <BookName
+                                id={obj.id}
+                                name={obj.titulo}
+                                navigation={this.props.history}
+                              />{" "}
+                              - {obj.autor}
+                            </p>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </>
+                )}
+              </>
+            )}
+          </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default User;

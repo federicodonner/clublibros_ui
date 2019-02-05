@@ -1,59 +1,134 @@
 import React from "react";
 import Header from "./Header";
-import Background from "./Background";
+import UserName from "./UserName";
+import { verifyLogin, fetchBook } from "../fetchFunctions";
 
 class Book extends React.Component {
-  render() {
-    const theBook = {
-      name: "Drive",
-      author: "Daniel Pink",
-      year: "2009",
-      abstract:
-        "Drive is the fourth non-fiction book by Daniel Pink. The book was published on December 29, 2009 by Riverhead Hardcover. In the text, he argues that human motivation is largely intrinsic, and that the aspects of this motivation can be divided into autonomy, mastery, and purpose.",
-      owner: "Daniel Marotta",
-      available: true,
-      reviews: [
-        { author: "Victoria Badani", stars: 4, text: "Genial!" },
-        {
-          author: "Federico Donner",
-          stars: 1,
-          text: "No muy bueno."
-        }
-      ]
-    };
+  state: {
+    user: {},
+    book: {}
+  };
 
+  componentDidMount() {
+    // Verify if the user has logged in before
+    const user = verifyLogin();
+    if (user) {
+      // If it has, store the information in state
+      this.setState({ user }, function() {
+        fetchBook(this.state.user.token, this.props.match.params.id)
+          .then(res => res.json())
+          .then(book => this.setState({ book }));
+      });
+
+      // this.setState({ user }, function() {
+      //   // Fetch the rest of the user information
+      //   fetchActiveUser(this.state.user.token)
+      //     .then(res => res.json())
+      //     .then(activeUser => this.setState({ activeUser }, function() {}));
+      //   // Load the available books
+      //   fetchBooks(this.state.user.token, "true")
+      //     .then(res => res.json())
+      //     .then(availableBooks => this.setState({ availableBooks }));
+      // });
+    } else {
+      // If there is no data in localStorage, go back to user select screen
+      // this.props.history.push(`/userselect`);
+      this.props.history.push({
+        pathname: "/userselect"
+        //state: { prueba: "hoooola" }
+      });
+    }
+  }
+
+  render() {
     return (
       <div className="app-view cover">
         <div className="scrollable">
-          <Header
-            logoType="blackLogo"
-            withGradient={true}
-            withGreeting={true}
-          />
+          {this.state && this.state.user && (
+            <Header
+              logoType="blackLogo"
+              withGreeting={true}
+              username={this.state.user.username}
+            />
+          )}
           <div className="content">
-            <p>
-              {theBook.name} - {theBook.author} - {theBook.year}
-            </p>
-            <p>
-              Lo trajo <a href="/user/1">{theBook.owner}</a>
-            </p>
-            <p>{theBook.abstract}</p>
-            <p>
-              Este libro está disponible, <a href="#">llevátelo!</a>
-            </p>
-            <p>
-              <a href="/user/1">{theBook.reviews[0].author}</a> le dio{" "}
-              {theBook.reviews[0].stars} estrellas y dijo:
-              <span className="reviewText">{theBook.reviews[0].text}</span>
-            </p>
-            <p>
-              <a href="/user/1">{theBook.reviews[1].author}</a> le dio{" "}
-              {theBook.reviews[1].stars} estrella y dijo:
-              <span className="reviewText">{theBook.reviews[1].text}</span>
-            </p>
+            {this.state && !this.state.book && (
+              <p>
+                <img src="/images/loader.gif" />
+              </p>
+            )}
+            {this.state && this.state.book && (
+              <>
+                <p>
+                  {this.state.book.titulo} - {this.state.book.autor} -{" "}
+                  {this.state.book.ano}
+                </p>
+                {this.state &&
+                  this.state.user &&
+                  this.state.book &&
+                  this.state.book.usr_dueno != this.state.user.user_id && (
+                    <p>
+                      Lo trajo{" "}
+                      <UserName
+                        id={this.state.book.usr_dueno}
+                        name={this.state.book.usr_dueno_nombre}
+                        navigation={this.props.history}
+                      />
+                    </p>
+                  )}
+
+                <p>{this.state.book.resumen}</p>
+                {this.state &&
+                  this.state.book &&
+                  !this.state.book.alquilerActivo && (
+                    <p>
+                      Este libro está disponible, <a href="#">llevátelo!</a>
+                    </p>
+                  )}
+                {this.state &&
+                  this.state.book &&
+                  this.state.book.alquilerActivo && (
+                    <p>
+                      Este libro no está disponible, lo tiene{" "}
+                      <UserName
+                        id={this.state.book.alquilerActivo.id_usuario}
+                        name={this.state.book.alquilerActivo.nombre}
+                        navigation={this.props.history}
+                      />
+                      .
+                      {this.state &&
+                        this.state.user &&
+                        this.state.book &&
+                        this.state.book.usr_dueno ==
+                          this.state.user.user_id && (
+                          <span className="newLine">
+                            <a href="#">Quiero que me lo devuelva.</a>
+                          </span>
+                        )}
+                    </p>
+                  )}
+
+                <ul className="libros">
+                  {this.state.book.reviews.map(obj => {
+                    return (
+                      <li key={obj.id}>
+                        <p>
+                          <UserName
+                            id={obj.id_usuario}
+                            name={obj.nombre}
+                            navigation={this.props.history}
+                          />{" "}
+                          le dio {obj.estrellas} estrellas y dijo:
+                          <span className="newLine">"{obj.texto}"</span>
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
+            )}
           </div>
         </div>
-        <Background />
       </div>
     );
   }

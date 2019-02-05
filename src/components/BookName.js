@@ -33,7 +33,10 @@ class BookName extends React.Component {
 
   goToBook = event => {
     event.preventDefault();
-    this.props.navigation.push(`/book/${this.props.id}`);
+    this.props.navigation.push({
+      pathname: "/book/" + this.props.id,
+      state: { bookid: this.props.id }
+    });
   };
 
   // selectBook() needs to run on page refresh to
