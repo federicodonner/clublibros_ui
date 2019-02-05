@@ -133,6 +133,10 @@ ul.libros li {
   display: block;
 }
 
+.loader{
+  margin-top: 50%
+}
+
 html,
 body,
 div,

@@ -40,7 +40,7 @@ class User extends React.Component {
           <div className="content">
             {this.state && !this.state.selectedUser && (
               <p>
-                <img src="/images/loader.gif" />
+                <img className="loader" src="/images/loader.gif" />
               </p>
             )}
             {this.state && this.state.selectedUser && (

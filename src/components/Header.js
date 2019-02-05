@@ -24,7 +24,11 @@ const Header = props => {
         <div className={logoClasses} />
       </a>
       <div className={greetingClasses}>
-        Hola, <span className={userName}>{props.username}</span>
+        {props.withGreeting && (
+          <>
+            Hola, <span className={userName}>{props.username}</span>
+          </>
+        )}
       </div>
     </div>
   );

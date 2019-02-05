@@ -54,7 +54,7 @@ class Book extends React.Component {
           <div className="content">
             {this.state && !this.state.book && (
               <p>
-                <img src="/images/loader.gif" />
+                <img className="loader" src="/images/loader.gif" />
               </p>
             )}
             {this.state && this.state.book && (
@@ -82,7 +82,7 @@ class Book extends React.Component {
                   this.state.book &&
                   !this.state.book.alquilerActivo && (
                     <p>
-                      Este libro está disponible, <a href="#">llevátelo!</a>
+                      Este libro está disponible, <a href="#">¡llevátelo!</a>
                     </p>
                   )}
                 {this.state &&

@@ -58,7 +58,7 @@ class Home extends React.Component {
           <div className="content">
             {this.state && !this.state.activeUser && (
               <p>
-                <img src="/images/loader.gif" />
+                <img className="loader" src="/images/loader.gif" />
               </p>
             )}
 

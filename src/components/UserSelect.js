@@ -41,30 +41,36 @@ class UserSelect extends React.Component {
     return (
       <div className="app-view cover">
         <div className="scrollable">
-          <Header
-            logoType="blackLogo"
-            withGradient={true}
-            withGreeting={false}
-          />
+          <Header logoType="blackLogo" withGradient={true} />
           <div className="content">
-            <p>¡Bienvenid@ a Libroclub!</p>
-            <p>
-              No estás logueado en libroclub. Por favor seleccioná quién sos:
-            </p>
-            <ul className="usuarios">
-              {this.state.usuarios.map(obj => {
-                return (
-                  <li key={obj.id}>
-                    <a href="#" onClick={this.loginUser(obj)}>
-                      {obj.nombre}
-                    </a>
-                  </li>
-                );
-              })}
-            </ul>
-            <p className="marginTop">
-              ¡Hey, <a>no estoy en la lista</a>!
-            </p>
+            {this.state && this.state.usuarios.length == 0 && (
+              <p>
+                <img className="loader" src="/images/loader.gif" />
+              </p>
+            )}
+            {this.state && this.state.usuarios.length != 0 && (
+              <>
+                <p>¡Bienvenid@ a Libroclub!</p>
+                <p>
+                  No estás logueado en libroclub. Por favor seleccioná tu
+                  nombre:
+                </p>
+                <ul className="usuarios">
+                  {this.state.usuarios.map(obj => {
+                    return (
+                      <li key={obj.id}>
+                        <a href="#" onClick={this.loginUser(obj)}>
+                          {obj.nombre}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <p className="marginTop">
+                  ¡Hey, <a>no estoy en la lista</a>!
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>
