@@ -508,17 +508,4 @@ padding-bottom: 100%;
   .form-submit {
     left: 0;
   }
-
-  #header {
-    position: absolute;
-    width: 100%;
-    z-index: 100;
-    text-align: left;
-  }
-
-  #header .top {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
 }

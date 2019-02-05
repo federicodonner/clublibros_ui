@@ -62,25 +62,26 @@ class Book extends React.Component {
                 <p>
                   {this.state.book.titulo} - {this.state.book.autor} -{" "}
                   {this.state.book.ano}
+                  {this.state &&
+                    this.state.user &&
+                    this.state.book &&
+                    this.state.book.usr_dueno != this.state.user.user_id && (
+                      <span className="newLine">
+                        Lo trajo{" "}
+                        <UserName
+                          id={this.state.book.usr_dueno}
+                          name={this.state.book.usr_dueno_nombre}
+                          navigation={this.props.history}
+                        />
+                      </span>
+                    )}
                 </p>
-                {this.state &&
-                  this.state.user &&
-                  this.state.book &&
-                  this.state.book.usr_dueno != this.state.user.user_id && (
-                    <p>
-                      Lo trajo{" "}
-                      <UserName
-                        id={this.state.book.usr_dueno}
-                        name={this.state.book.usr_dueno_nombre}
-                        navigation={this.props.history}
-                      />
-                    </p>
-                  )}
 
                 <p>{this.state.book.resumen}</p>
                 {this.state &&
                   this.state.book &&
-                  !this.state.book.alquilerActivo && (
+                  !this.state.book.alquilerActivo &&
+                  this.state.book.usr_dueno != this.state.user.user_id && (
                     <p>
                       Este libro está disponible, <a href="#">¡llevátelo!</a>
                     </p>
@@ -105,6 +106,18 @@ class Book extends React.Component {
                             <a href="#">Quiero que me lo devuelva.</a>
                           </span>
                         )}
+                    </p>
+                  )}
+
+                {this.state &&
+                  this.state.book &&
+                  !this.state.book.alquilerActivo &&
+                  this.state.book.usr_dueno == this.state.user.user_id && (
+                    <p>
+                      Este libro está disponible.
+                      <span className="newLine">
+                        <a href="#">Quiero sacarlo de libroclub.</a>
+                      </span>
                     </p>
                   )}
 
