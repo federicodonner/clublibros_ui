@@ -133,8 +133,31 @@ ul.libros li {
   display: block;
 }
 
-.loader{
-  margin-top: 50%
+.loader {
+  margin-top: 50%;
+}
+
+.pretty-form {
+  margin-bottom: 30px;
+}
+
+.pretty-form .form-input {
+  display: block;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: 600;
+}
+
+.pretty-form .form-input .pretty-input {
+  padding: 5px;
+  font-size: 10pt;
+  width: 55%;
+}
+
+.pretty-form .pretty-submit {
+  color: #c1c1c2;
+  font-weight: 600;
+  font-size: 12pt;
 }
 
 html,

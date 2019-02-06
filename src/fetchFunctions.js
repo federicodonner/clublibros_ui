@@ -23,6 +23,20 @@ export function fetchUser(token, id) {
   });
 }
 
+export function signupUser(user, companyId) {
+  const data = { nombre: user.nombre, email: user.email, empresa: companyId };
+  const url =
+    "http://www.federicodonner.com/clublibros_api/public/api/usuarios";
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate"
+    },
+    body: JSON.stringify(data)
+  });
+}
+
 export function fetchActiveUser(token) {
   const url = "http://www.federicodonner.com/clublibros_api/public/api/yo";
 
@@ -70,6 +84,27 @@ export function fetchBook(token, id) {
     headers: {
       Authorization: "Bearer " + token
     }
+  });
+}
+
+export function addBook(book, userId, token) {
+  const url = "http://www.federicodonner.com/clublibros_api/public/api/libros";
+  const data = {
+    titulo: book.titulo,
+    autor: book.autor,
+    ano: book.ano,
+    resumen: book.resumen,
+    idioma: book.idioma,
+    usr_dueno: userId
+  };
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate",
+      Authorization: "Bearer " + token
+    },
+    body: JSON.stringify(data)
   });
 }
 

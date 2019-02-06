@@ -31,6 +31,13 @@ class UserSelect extends React.Component {
       .catch(error => console.error("Error:", error));
   };
 
+  goToSignup = companyId => event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/signup/" + companyId
+    });
+  };
+
   componentDidMount() {
     var user = verifyLogin();
     if (user) {
@@ -78,7 +85,11 @@ class UserSelect extends React.Component {
                     })}
                   </ul>
                   <p className="marginTop">
-                    ¡Hey, <a>no estoy en la lista</a>!
+                    ¡Hey,{" "}
+                    <a onClick={this.goToSignup(this.props.match.params.id)}>
+                      no estoy en la lista
+                    </a>
+                    !
                   </p>
                 </>
               )}

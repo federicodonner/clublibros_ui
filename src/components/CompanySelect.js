@@ -67,7 +67,7 @@ class CompanySelect extends React.Component {
                   })}
                 </ul>
                 <p className="marginTop">
-                  Quiero empezar a usar Libroclub,{" "}
+                  Quiero empezar a usar Libroclub con un grupo propio,{" "}
                   <span className="newLine">
                     <a onClick={this.goToCredits()}>¿cómo puedo hacer?</a>
                   </span>

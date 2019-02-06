@@ -7,7 +7,9 @@ import Me from "./Me";
 import CompanySelect from "./CompanySelect";
 import UserSelect from "./UserSelect";
 import Credits from "./Credits";
-import Redirect from "./Redirect.js";
+import Redirect from "./Redirect";
+import Signup from "./Signup";
+import AddBook from "./AddBook";
 import NotFound from "./NotFound";
 
 class Router extends React.Component {
@@ -25,6 +27,9 @@ class Router extends React.Component {
           <Route path="/userselect/:id" component={UserSelect} />
           <Route path="/userselect" component={Redirect} />
           <Route path="/credits" component={Credits} />
+          <Route path="/signup/:id" component={Signup} />
+          <Route path="/signup" component={Redirect} />
+          <Route path="/addbook" component={AddBook} />
           <Route component={Home} />
         </Switch>
       </BrowserRouter>

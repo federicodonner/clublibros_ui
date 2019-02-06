@@ -12,10 +12,11 @@ class Home extends React.Component {
     availableBooks: {}
   };
 
-  goToDetails = event => {
+  goToAddBook = () => event => {
     event.preventDefault();
-
-    this.props.history.push(`/me`);
+    this.props.history.push({
+      pathname: "/addbook"
+    });
   };
 
   componentDidMount() {
@@ -64,71 +65,85 @@ class Home extends React.Component {
 
             {this.state &&
               this.state.activeUser &&
-              !this.state.activeUser.alquilerActivo && (
+              this.state.activeUser.libros.length == 0 && (
                 <p>
-                  No tenés ningún libro alquilado.
-                  <span className="newLine">
-                    Estos están disponibles para que te lleves:
-                  </span>
+                  Para poder sumarte al Libroclub de tu grupo es necesario que
+                  traigas por lo menos un libro. Podés ingresarlos{" "}
+                  <a onClick={this.goToAddBook()}>haciendo click aquí</a>.
                 </p>
               )}
 
             {this.state &&
               this.state.activeUser &&
-              this.state.activeUser.alquilerActivo && (
+              this.state.activeUser.libros.length > 0 && (
                 <>
-                  <p>
-                    Tenes{" "}
-                    <BookName
-                      id={this.state.activeUser.alquilerActivo.id_libro}
-                      name={this.state.activeUser.alquilerActivo.nombreLibro}
-                      navigation={this.props.history}
-                    />{" "}
-                    desde el{" "}
-                    {convertDate(
-                      this.state.activeUser.alquilerActivo.fecha_salida
+                  {this.state &&
+                    this.state.activeUser &&
+                    !this.state.activeUser.alquilerActivo && (
+                      <p>
+                        No tenés ningún libro alquilado.
+                        <span className="newLine">
+                          Estos están disponibles para que te lleves:
+                        </span>
+                      </p>
                     )}
-                    .
-                    <span className="newLine">
-                      Si ya lo devolviste, <a href="#">finaliza el alquiler</a>.
-                    </span>
-                  </p>
-                  <p>
-                    Estos son los libros que podés disfrutar cuando termines{" "}
-                    <BookName
-                      id={this.state.activeUser.alquilerActivo.id_libro}
-                      name={this.state.activeUser.alquilerActivo.nombreLibro}
-                      navigation={this.props.history}
-                    />
-                    :
-                  </p>
+
+                  {this.state &&
+                    this.state.activeUser &&
+                    this.state.activeUser.alquilerActivo && (
+                      <>
+                        <p>
+                          Tenes{" "}
+                          <BookName
+                            id={this.state.activeUser.alquilerActivo.id_libro}
+                            name={
+                              this.state.activeUser.alquilerActivo.nombreLibro
+                            }
+                            navigation={this.props.history}
+                          />{" "}
+                          desde el{" "}
+                          {convertDate(
+                            this.state.activeUser.alquilerActivo.fecha_salida
+                          )}
+                          .
+                          <span className="newLine">
+                            Si ya lo devolviste,{" "}
+                            <a href="#">finaliza el alquiler</a>.
+                          </span>
+                        </p>
+                        <p>
+                          Estos son los libros que podés disfrutar cuando
+                          termines{" "}
+                          <BookName
+                            id={this.state.activeUser.alquilerActivo.id_libro}
+                            name={
+                              this.state.activeUser.alquilerActivo.nombreLibro
+                            }
+                            navigation={this.props.history}
+                          />
+                          :
+                        </p>
+                      </>
+                    )}
+
+                  {this.state && this.state.availableBooks && (
+                    <ul className="libros">
+                      {this.state.availableBooks.map(obj => {
+                        return (
+                          <li key={obj.id}>
+                            <BookName
+                              id={obj.id}
+                              name={obj.titulo}
+                              navigation={this.props.history}
+                            />{" "}
+                            - {obj.autor}
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  )}
                 </>
               )}
-
-            {this.state && this.state.availableBooks && (
-              <ul className="libros">
-                {this.state.availableBooks.map(obj => {
-                  return (
-                    <li key={obj.id}>
-                      <BookName
-                        id={obj.id}
-                        name={obj.titulo}
-                        navigation={this.props.history}
-                      />{" "}
-                      - {obj.autor}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-
-            {/*Usuario:
-              <UserName
-                name={"Daniel Marotta"}
-                id={5}
-                navigation={this.props.history}
-              />
-              */}
           </div>
         </div>
       </div>
