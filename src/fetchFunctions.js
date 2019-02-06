@@ -1,11 +1,7 @@
 export function fetchCompanies() {
-  fetch("http://www.federicodonner.com/clublibros_api/public/api/companias")
-    .then(results => {
-      return results.json();
-    })
-    .then(data => {
-      console.log("data", data);
-    });
+  return fetch(
+    "http://www.federicodonner.com/clublibros_api/public/api/empresas"
+  );
 }
 
 export function fetchUsers(empresa) {
@@ -87,5 +83,14 @@ export function verifyLogin() {
 
   if (username && token && user_id) {
     return { username: username, user_id: user_id, token: token };
+  }
+}
+
+// This function verifies that the company has been selected
+// and stored in localstorage
+export function verifyCompany() {
+  const company = localStorage.getItem("libroclub_company");
+  if (company) {
+    return { company };
   }
 }

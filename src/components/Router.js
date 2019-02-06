@@ -4,7 +4,7 @@ import Home from "./Home";
 import Book from "./Book";
 import User from "./User";
 import Me from "./Me";
-import Company from "./Company";
+import CompanySelect from "./CompanySelect";
 import UserSelect from "./UserSelect";
 import NotFound from "./NotFound";
 
@@ -19,7 +19,7 @@ class Router extends React.Component {
           <Route path="/book/:id" component={Book} />
           <Route path="/me" component={Me} />
           <Route path="/user/:id" component={User} />
-          <Route path="/company" component={Company} />
+          <Route path="/companySelect" component={CompanySelect} />
           <Route path="/userselect" component={UserSelect} />
           <Route component={Home} />
         </Switch>

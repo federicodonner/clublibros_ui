@@ -1,12 +1,11 @@
 import React from "react";
 import Header from "./Header";
-import UserName from "./UserName";
 import { verifyLogin, fetchBook } from "../fetchFunctions";
 
-class UserSignup extends React.Component {
+
+
+class Book extends React.Component {
   state: {
-    user: {},
-    book: {}
   };
 
   componentDidMount() {
@@ -147,4 +146,4 @@ class UserSignup extends React.Component {
   }
 }
 
-export default UserSignup;
+export default Book;

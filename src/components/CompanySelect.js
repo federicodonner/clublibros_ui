@@ -1,0 +1,82 @@
+import React from "react";
+import Header from "./Header";
+import { fetchCompanies } from "../fetchFunctions";
+
+class CompanySelect extends React.Component {
+  state = {
+    empresas: []
+  };
+
+  loginUser = user => event => {
+    // Frena la navegación automática cuando se submitea el form
+    event.preventDefault();
+    // Así se obtiene le contenido del input
+    // const storeName = this.myInput.current.value;
+    // // Push es una función de Router que permite cambiar de estado
+    // // Como este componente es hijo de Router, hereda los métodos
+    // // OJO QUE NO SON COMILLAS, SON TILDES INVERTIDOS
+    //this.props.history.push(`/user/${id}`);
+    // loginUser(user)
+    //   .then(res => res.json())
+    //   .then(response => {
+    //     localStorage.setItem("libroclub_token", response.token);
+    //     localStorage.setItem("libroclub_username", user.nombre);
+    //     localStorage.setItem("libroclub_id", user.id);
+    //     this.props.history.push(`/`);
+    //   })
+    //
+    // .catch(error => console.error("Error:", error));
+  };
+
+  componentDidMount() {
+    fetchCompanies()
+      .then(results => {
+        return results.json();
+      })
+      .then(response => {
+        this.setState({ empresas: response.empresas});
+      });
+  }
+
+  render() {
+    return (
+      <div className="app-view cover">
+        <div className="scrollable">
+          <Header withGradient={false} />
+          <div className="content">
+            {this.state && this.state.empresas.length == 0 && (
+              <p>
+                <img className="loader" src="/images/loader.gif" />
+              </p>
+            )}
+            {this.state && this.state.empresas.length != 0 && (
+              <>
+                <p>¡Bienvenid@ a Libroclub!</p>
+                <p>
+                  No estás logueado en libroclub. Por favor seleccioná tu
+                  nombre:
+                </p>
+                <ul className="usuarios">
+                  {this.state.empresas.map(obj => {
+                    return (
+                      <li key={obj.id}>
+                        <a href="#" onClick={this.loginUser(obj)}>
+                          {obj.nombre}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+                <p className="marginTop">
+                  ¡Hey, <a>no estoy en la lista</a>!
+                </p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
+
+export default CompanySelect;
