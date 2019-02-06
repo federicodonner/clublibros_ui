@@ -1,40 +1,40 @@
 import React from "react";
 import Header from "./Header";
-import { fetchCompanies } from "../fetchFunctions";
+import { fetchCompanies, verifyLogin } from "../fetchFunctions";
 
 class CompanySelect extends React.Component {
   state = {
     empresas: []
   };
 
-  loginUser = user => event => {
-    // Frena la navegación automática cuando se submitea el form
+  companySelect = companyId => event => {
     event.preventDefault();
-    // Así se obtiene le contenido del input
-    // const storeName = this.myInput.current.value;
-    // // Push es una función de Router que permite cambiar de estado
-    // // Como este componente es hijo de Router, hereda los métodos
-    // // OJO QUE NO SON COMILLAS, SON TILDES INVERTIDOS
-    //this.props.history.push(`/user/${id}`);
-    // loginUser(user)
-    //   .then(res => res.json())
-    //   .then(response => {
-    //     localStorage.setItem("libroclub_token", response.token);
-    //     localStorage.setItem("libroclub_username", user.nombre);
-    //     localStorage.setItem("libroclub_id", user.id);
-    //     this.props.history.push(`/`);
-    //   })
-    //
-    // .catch(error => console.error("Error:", error));
+    this.props.history.push({
+      pathname: "/userSelect/" + companyId
+    });
+  };
+
+  goToCredits = () => event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/credits"
+    });
   };
 
   componentDidMount() {
+    var user = verifyLogin();
+    if (user) {
+      this.props.history.push({
+        pathname: "/"
+      });
+    }
+
     fetchCompanies()
       .then(results => {
         return results.json();
       })
       .then(response => {
-        this.setState({ empresas: response.empresas});
+        this.setState({ empresas: response.empresas });
       });
   }
 
@@ -53,14 +53,13 @@ class CompanySelect extends React.Component {
               <>
                 <p>¡Bienvenid@ a Libroclub!</p>
                 <p>
-                  No estás logueado en libroclub. Por favor seleccioná tu
-                  nombre:
+                  No estás logueado en libroclub. Por favor seleccioná tu grupo:
                 </p>
                 <ul className="usuarios">
                   {this.state.empresas.map(obj => {
                     return (
                       <li key={obj.id}>
-                        <a href="#" onClick={this.loginUser(obj)}>
+                        <a href="#" onClick={this.companySelect(obj.id)}>
                           {obj.nombre}
                         </a>
                       </li>
@@ -68,7 +67,10 @@ class CompanySelect extends React.Component {
                   })}
                 </ul>
                 <p className="marginTop">
-                  ¡Hey, <a>no estoy en la lista</a>!
+                  Quiero empezar a usar Libroclub,{" "}
+                  <span className="newLine">
+                    <a onClick={this.goToCredits()}>¿cómo puedo hacer?</a>
+                  </span>
                 </p>
               </>
             )}

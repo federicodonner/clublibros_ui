@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import { fetchUsers, loginUser } from "../fetchFunctions";
+import { fetchUsers, loginUser, verifyLogin } from "../fetchFunctions";
 
 class UserSelect extends React.Component {
   state = {
@@ -28,7 +28,12 @@ class UserSelect extends React.Component {
   };
 
   componentDidMount() {
-    fetchUsers("1")
+    var user = verifyLogin();
+    if (user) {
+      this.props.history.push(`/`);
+    }
+
+    fetchUsers(this.props.match.params.id)
       .then(results => {
         return results.json();
       })
@@ -41,7 +46,7 @@ class UserSelect extends React.Component {
     return (
       <div className="app-view cover">
         <div className="scrollable">
-          <Header logoType="blackLogo" withGradient={true} />
+          <Header />
           <div className="content">
             {this.state && this.state.usuarios.length == 0 && (
               <p>

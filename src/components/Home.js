@@ -37,7 +37,7 @@ class Home extends React.Component {
       // If there is no data in localStorage, go back to user select screen
       // this.props.history.push(`/userselect`);
       this.props.history.push({
-        pathname: "/userselect"
+        pathname: "/companyselect"
         //state: { prueba: "hoooola" }
       });
     }

@@ -85,12 +85,3 @@ export function verifyLogin() {
     return { username: username, user_id: user_id, token: token };
   }
 }
-
-// This function verifies that the company has been selected
-// and stored in localstorage
-export function verifyCompany() {
-  const company = localStorage.getItem("libroclub_company");
-  if (company) {
-    return { company };
-  }
-}
