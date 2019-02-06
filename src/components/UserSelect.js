@@ -4,12 +4,16 @@ import { fetchUsers, loginUser, verifyLogin } from "../fetchFunctions";
 
 class UserSelect extends React.Component {
   state = {
-    usuarios: []
+    usuarios: [],
+    loader: false
   };
 
   loginUser = user => event => {
     // Frena la navegación automática cuando se submitea el form
     event.preventDefault();
+
+    this.setState({ loader: true });
+
     // Así se obtiene le contenido del input
     // const storeName = this.myInput.current.value;
     // // Push es una función de Router que permite cambiar de estado
@@ -48,34 +52,36 @@ class UserSelect extends React.Component {
         <div className="scrollable">
           <Header />
           <div className="content">
-            {this.state && this.state.usuarios.length == 0 && (
-              <p>
-                <img className="loader" src="/images/loader.gif" />
-              </p>
-            )}
-            {this.state && this.state.usuarios.length != 0 && (
-              <>
-                <p>¡Bienvenid@ a Libroclub!</p>
+            {this.state &&
+              (this.state.usuarios.length == 0 || this.state.loader) && (
                 <p>
-                  No estás logueado en libroclub. Por favor seleccioná tu
-                  nombre:
+                  <img className="loader" src="/images/loader.gif" />
                 </p>
-                <ul className="usuarios">
-                  {this.state.usuarios.map(obj => {
-                    return (
-                      <li key={obj.id}>
-                        <a href="#" onClick={this.loginUser(obj)}>
-                          {obj.nombre}
-                        </a>
-                      </li>
-                    );
-                  })}
-                </ul>
-                <p className="marginTop">
-                  ¡Hey, <a>no estoy en la lista</a>!
-                </p>
-              </>
-            )}
+              )}
+            {this.state &&
+              (this.state.usuarios.length != 0 && !this.state.loader) && (
+                <>
+                  <p>¡Bienvenid@ a Libroclub!</p>
+                  <p>
+                    No estás logueado en libroclub. Por favor seleccioná tu
+                    nombre:
+                  </p>
+                  <ul className="usuarios">
+                    {this.state.usuarios.map(obj => {
+                      return (
+                        <li key={obj.id}>
+                          <a href="#" onClick={this.loginUser(obj)}>
+                            {obj.nombre}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                  <p className="marginTop">
+                    ¡Hey, <a>no estoy en la lista</a>!
+                  </p>
+                </>
+              )}
           </div>
         </div>
       </div>
