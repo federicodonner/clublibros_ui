@@ -4,7 +4,7 @@ import { verifyLogin, fetchBook } from "../fetchFunctions";
 
 
 
-class Book extends React.Component {
+class UserSignup extends React.Component {
   state: {
   };
 
@@ -146,4 +146,4 @@ class Book extends React.Component {
   }
 }
 
-export default Book;
+export default UserSignup;

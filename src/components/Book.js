@@ -3,7 +3,7 @@ import Header from "./Header";
 import UserName from "./UserName";
 import { verifyLogin, fetchBook } from "../fetchFunctions";
 
-class UserSignup extends React.Component {
+class Book extends React.Component {
   state: {
     user: {},
     book: {}
@@ -88,7 +88,9 @@ class UserSignup extends React.Component {
                   )}
                 {this.state &&
                   this.state.book &&
-                  this.state.book.alquilerActivo && (
+                  this.state.book.alquilerActivo &&
+                  this.state.book.alquilerActivo.id_usuario !=
+                    this.state.user.user_id && (
                     <p>
                       Este libro no está disponible, lo tiene{" "}
                       <UserName
@@ -106,6 +108,16 @@ class UserSignup extends React.Component {
                             <a href="#">Quiero que me lo devuelva.</a>
                           </span>
                         )}
+                    </p>
+                  )}
+                {this.state &&
+                  this.state.book &&
+                  this.state.book.alquilerActivo &&
+                  this.state.book.alquilerActivo.id_usuario ==
+                    this.state.user.user_id && (
+                    <p>
+                      Este libro no está disponible, lo tenés vos. Si ya lo
+                      devolviste <a>clickeá aqui</a>
                     </p>
                   )}
 
@@ -147,4 +159,4 @@ class UserSignup extends React.Component {
   }
 }
 
-export default UserSignup;
+export default Book;
