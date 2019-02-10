@@ -49,7 +49,7 @@ export function fetchActiveUser(token) {
 }
 
 export function loginUser(user) {
-  const data = { grant_type: "password", user: user.nombre };
+  const data = { grant_type: "password", user: user };
   const url = "http://www.federicodonner.com/clublibros_api/public/api/oauth";
 
   return fetch(url, {

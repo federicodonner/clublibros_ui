@@ -20,7 +20,7 @@ class UserSelect extends React.Component {
     // // Como este componente es hijo de Router, hereda los métodos
     // // OJO QUE NO SON COMILLAS, SON TILDES INVERTIDOS
     //this.props.history.push(`/user/${id}`);
-    loginUser(user)
+    loginUser(user.nombre)
       .then(res => res.json())
       .then(response => {
         localStorage.setItem("libroclub_token", response.token);

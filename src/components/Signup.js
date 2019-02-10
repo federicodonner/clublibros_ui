@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import { signupUser } from "../fetchFunctions";
+import { signupUser, loginUser } from "../fetchFunctions";
 
 class Signup extends React.Component {
   state: {
@@ -24,11 +24,24 @@ class Signup extends React.Component {
     };
     this.setState({ loading: true });
 
-    signupUser(user, this.props.match.params.id);
-
-    //this.props.addFish(fish);
-    // Refresh the form
-    //event.currentTarget.reset(); // Can also be done via ref
+    signupUser(user, this.props.match.params.id)
+      .then(res => res.json())
+      .then(
+        function(signupResponse) {
+          if (signupResponse.status == "success") {
+            console.log(signupResponse);
+            loginUser(signupResponse.usuario)
+              .then(res => res.json())
+              .then(response => {
+                localStorage.setItem("libroclub_token", response.token);
+                localStorage.setItem("libroclub_username", user.nombre);
+                localStorage.setItem("libroclub_id", user.id);
+                this.props.history.push({ pathname: "/" });
+              })
+              .catch(error => console.error("Error:", error));
+          }
+        }.bind(this)
+      );
   };
 
   componentDidMount() {
