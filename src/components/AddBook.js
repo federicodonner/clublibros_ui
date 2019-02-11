@@ -10,7 +10,7 @@ class AddBook extends React.Component {
     bookAdded: false
   };
 
-  return = () => event => {
+  navigateBack = () => event => {
     event.preventDefault();
     console.log(this.props.history);
     this.props.history.goBack();
@@ -155,7 +155,7 @@ class AddBook extends React.Component {
                       </button>
                     </form>
                     <p>
-                      <a onClick={this.return()}>Cancelar</a>
+                      <a onClick={this.navigateBack()}>Cancelar</a>
                     </p>
                   </>
                 )}
@@ -165,9 +165,9 @@ class AddBook extends React.Component {
               this.state.bookAdded &&
               this.state.response.addSuccessful && (
                 <>
-                  <p>{this.state.response.bookTitle} agregado exitosamente.</p>
+                  <p>{this.state.response.bookTitle} fue agregado exitosamente.</p>
                   <p>
-                    <a onClick={this.return()}>Volver</a>
+                    <a onClick={this.navigateBack()}>Volver</a>
                   </p>
                   <p>
                     <a onClick={this.resetState()}>Agregar otro</a>

@@ -78,61 +78,74 @@ class Book extends React.Component {
                 </p>
 
                 <p>{this.state.book.resumen}</p>
+
                 {this.state &&
                   this.state.book &&
                   !this.state.book.alquilerActivo &&
                   this.state.book.usr_dueno != this.state.user.user_id && (
-                    <p>
-                      Este libro está disponible, <a href="#">¡llevátelo!</a>
-                    </p>
+                    <>
+                      <img className="separador" src="/images/separador.png" />
+                      <p>
+                        Este libro está disponible, <a href="#">¡llevátelo!</a>
+                      </p>
+                    </>
                   )}
                 {this.state &&
                   this.state.book &&
                   this.state.book.alquilerActivo &&
                   this.state.book.alquilerActivo.id_usuario !=
                     this.state.user.user_id && (
-                    <p>
-                      Este libro no está disponible, lo tiene{" "}
-                      <UserName
-                        id={this.state.book.alquilerActivo.id_usuario}
-                        name={this.state.book.alquilerActivo.nombre}
-                        navigation={this.props.history}
-                      />
-                      .
-                      {this.state &&
-                        this.state.user &&
-                        this.state.book &&
-                        this.state.book.usr_dueno ==
-                          this.state.user.user_id && (
-                          <span className="newLine">
-                            <a href="#">Quiero que me lo devuelva.</a>
-                          </span>
-                        )}
-                    </p>
+                    <>
+                      <img className="separador" src="/images/separador.png" />
+                      <p>
+                        Este libro no está disponible, lo tiene{" "}
+                        <UserName
+                          id={this.state.book.alquilerActivo.id_usuario}
+                          name={this.state.book.alquilerActivo.nombre}
+                          navigation={this.props.history}
+                        />
+                        .
+                        {this.state &&
+                          this.state.user &&
+                          this.state.book &&
+                          this.state.book.usr_dueno ==
+                            this.state.user.user_id && (
+                            <span className="newLine">
+                              <a href="#">Quiero que me lo devuelva.</a>
+                            </span>
+                          )}
+                      </p>
+                    </>
                   )}
                 {this.state &&
                   this.state.book &&
                   this.state.book.alquilerActivo &&
                   this.state.book.alquilerActivo.id_usuario ==
                     this.state.user.user_id && (
-                    <p>
-                      Este libro no está disponible, lo tenés vos. Si ya lo
-                      devolviste <a>clickeá aqui</a>
-                    </p>
+                    <>
+                      <img className="separador" src="/images/separador.png" />
+                      <p>
+                        Este libro no está disponible, lo tenés vos. Si ya lo
+                        devolviste <a>clickeá aqui</a>
+                      </p>
+                    </>
                   )}
 
                 {this.state &&
                   this.state.book &&
                   !this.state.book.alquilerActivo &&
                   this.state.book.usr_dueno == this.state.user.user_id && (
-                    <p>
-                      Este libro está disponible.
-                      <span className="newLine">
-                        <a href="#">Quiero sacarlo de libroclub.</a>
-                      </span>
-                    </p>
+                    <>
+                      <img className="separador" src="/images/separador.png" />
+                      <p>
+                        Este libro es tuyo y está disponible.
+                        <span className="newLine">
+                          <a href="#">Quiero sacarlo de libroclub.</a>
+                        </span>
+                      </p>
+                    </>
                   )}
-
+                <img className="separador" src="/images/separador.png" />
                 <ul className="libros">
                   {this.state.book.reviews.map(obj => {
                     return (

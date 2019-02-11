@@ -30,12 +30,7 @@ class User extends React.Component {
       <div className="app-view cover">
         <div className="scrollable">
           {this.state && this.state.user && (
-            <Header
-              logoType="blackLogo"
-              withGreeting={true}
-              logoType="whiteLogo"
-              username={this.state.user.username}
-            />
+            <Header withGreeting={true} username={this.state.user.username} />
           )}
           <div className="content">
             {this.state && !this.state.selectedUser && (
@@ -95,8 +90,17 @@ class User extends React.Component {
                       ningún libro. ¡Recomendale alguno!
                     </p>
                   )}
+                {this.state.selectedUser.alquileres.length != 0 &&
+                  !this.state.selectedUser.alquilerActivo && (
+                    <p>
+                      {this.state.selectedUser.nombre} no tiene ningún libro
+                      ahora.
+                    </p>
+                  )}
                 {this.state.selectedUser.alquileres.length != 0 && (
                   <>
+                    <img className="separador" src="/images/separador.png" />
+
                     <p>{this.state.selectedUser.nombre} leyó estos libros:</p>
 
                     <ul className="libros">
@@ -123,11 +127,17 @@ class User extends React.Component {
                 )}
 
                 {this.state.selectedUser.libros.length == 0 && (
-                  <p>{this.state.selectedUser.nombre} no trajo ningún libro.</p>
+                  <>
+                    <img className="separador" src="/images/separador.png" />
+                    <p>
+                      {this.state.selectedUser.nombre} no trajo ningún libro.
+                    </p>
+                  </>
                 )}
 
                 {this.state.selectedUser.libros.length != 0 && (
                   <>
+                    <img className="separador" src="/images/separador.png" />
                     <p>{this.state.selectedUser.nombre} trajo estos libros:</p>
                     <ul className="libros">
                       {this.state.selectedUser.libros.map(obj => {

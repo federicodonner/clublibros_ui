@@ -97,7 +97,7 @@ class Home extends React.Component {
                           <BookName
                             id={this.state.activeUser.alquilerActivo.id_libro}
                             name={
-                              this.state.activeUser.alquilerActivo.nombreLibro
+                              this.state.activeUser.alquilerActivo.nombre_libro
                             }
                             navigation={this.props.history}
                           />{" "}
@@ -111,6 +111,10 @@ class Home extends React.Component {
                             <a href="#">finaliza el alquiler</a>.
                           </span>
                         </p>
+                        <img
+                          className="separador"
+                          src="/images/separador.png"
+                        />
                         <p>
                           Estos son los libros que podés disfrutar cuando
                           termines{" "}
