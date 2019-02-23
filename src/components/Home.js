@@ -19,6 +19,8 @@ class Home extends React.Component {
     });
   };
 
+  // Test
+
   componentDidMount() {
     // Verify if the user has logged in before
     const user = verifyLogin();
