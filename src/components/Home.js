@@ -19,6 +19,13 @@ class Home extends React.Component {
     });
   };
 
+  goToPersonalDetails = event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/me"
+    });
+  };
+
   // Test
 
   componentDidMount() {
@@ -148,6 +155,12 @@ class Home extends React.Component {
                       })}
                     </ul>
                   )}
+                  <img className="separador" src="/images/separador.png" />
+                  <p>
+                    {" "}
+                    Ver mis{" "}
+                    <a onClick={this.goToPersonalDetails}>datos personales</a>
+                  </p>
                 </>
               )}
           </div>
