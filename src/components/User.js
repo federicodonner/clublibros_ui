@@ -16,7 +16,15 @@ class User extends React.Component {
       this.setState({ user }, function() {
         fetchUser(this.state.user.token, this.props.match.params.id)
           .then(res => res.json())
-          .then(selectedUser => this.setState({ selectedUser }));
+          .then(
+            function(selectedUser) {
+              if ((this.state.user.user_id == selectedUser.id)) {
+                this.props.history.push({ pathname: "/me" });
+              } else {
+                this.setState({ selectedUser });
+              }
+            }.bind(this)
+          );
       });
     } else {
       this.props.history.push({
@@ -57,9 +65,6 @@ class User extends React.Component {
                         this.state.selectedUser.alquilerActivo.fecha_salida
                       )}
                       .
-                      <span className="newLine">
-                        <a href="#">Pedile que lo devuelva</a>
-                      </span>
                     </p>
                   )}
 
