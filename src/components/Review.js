@@ -12,7 +12,7 @@ class Review extends React.Component {
     userEnteredReview:false
   };
 
-  return = () => event => {
+  return = event => {
     event.preventDefault();
     this.props.history.goBack();
   };
@@ -117,7 +117,7 @@ class Review extends React.Component {
                     </button>
                   </form>
                   <p>
-                    <a onClick={this.return()}>Cancelar</a>
+                    <a onClick={this.return}>Cancelar</a>
                   </p>
                 </>
               )}

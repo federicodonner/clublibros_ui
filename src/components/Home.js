@@ -26,7 +26,12 @@ class Home extends React.Component {
     });
   };
 
-  // Test
+  goToReturnBook = event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/return/" + this.state.activeUser.alquilerActivo.id_libro
+    });
+  };
 
   componentDidMount() {
     // Verify if the user has logged in before
@@ -117,7 +122,10 @@ class Home extends React.Component {
                           .
                           <span className="newLine">
                             Si ya lo devolviste,{" "}
-                            <a href="#">finaliza el alquiler</a>.
+                            <a onClick={this.goToReturnBook}>
+                              finaliza el alquiler
+                            </a>
+                            .
                           </span>
                         </p>
                         <img

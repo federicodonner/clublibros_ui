@@ -121,6 +121,34 @@ export function addReview(data, token) {
   });
 }
 
+export function rentBook(data, token) {
+  const url =
+    "http://www.federicodonner.com/clublibros_api/public/api/alquileres";
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate",
+      Authorization: "Bearer " + token
+    },
+    body: JSON.stringify(data)
+  });
+}
+
+export function returnBook(book_id, token) {
+  const url =
+    "http://www.federicodonner.com/clublibros_api/public/api/alquileres/" +
+    book_id;
+  return fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate",
+      Authorization: "Bearer " + token
+    }
+  });
+}
+
 // This function verifies login information in local storage
 // If not found, it navigates to userselect
 // Should be called from componentDidMount in every route

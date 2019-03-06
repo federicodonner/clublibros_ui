@@ -17,6 +17,13 @@ class Book extends React.Component {
     });
   };
 
+  rentBook = event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/rental/" + this.state.book.id
+    });
+  };
+
   componentDidMount() {
     // Verify if the user has logged in before
     const user = verifyLogin();
@@ -90,11 +97,12 @@ class Book extends React.Component {
                 {this.state &&
                   this.state.book &&
                   !this.state.book.alquilerActivo &&
-                  this.state.book.usr_dueno != this.state.user.user_id && (
+                  this.state.book.usr_dueno != this.state.user.user_id && !this.state.book.usuarioTieneAlquiler && (
                     <>
                       <img className="separador" src="/images/separador.png" />
                       <p>
-                        Este libro está disponible, <a href="#">¡llevátelo!</a>
+                        Este libro está disponible,{" "}
+                        <a onClick={this.rentBook}>¡llevátelo!</a>
                       </p>
                     </>
                   )}
@@ -111,17 +119,7 @@ class Book extends React.Component {
                           id={this.state.book.alquilerActivo.id_usuario}
                           name={this.state.book.alquilerActivo.nombre}
                           navigation={this.props.history}
-                        />
-                        .
-                        {this.state &&
-                          this.state.user &&
-                          this.state.book &&
-                          this.state.book.usr_dueno ==
-                            this.state.user.user_id && (
-                            <span className="newLine">
-                              <a href="#">Quiero que me lo devuelva.</a>
-                            </span>
-                          )}
+                        />.
                       </p>
                     </>
                   )}
