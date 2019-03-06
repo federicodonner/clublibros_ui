@@ -35,7 +35,6 @@ class Review extends React.Component {
       .then(
         function(respuesta) {
           if (respuesta.status == "success") {
-            alert("Reseña agregada exitosamente");
             this.props.history.push({ pathname: "/book/" + this.state.book.id });
           } else {
             alert("Ocurrió un error, intenta nuevamente más tarde.");

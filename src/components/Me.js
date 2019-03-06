@@ -80,7 +80,7 @@ class Me extends React.Component {
                       </ul>
                     </>
                   )}
-
+                <img className="separador" src="/images/separador.png" />
                 <p>
                   <a onClick={this.addBook()}>Agregar un libro nuevo</a>
                 </p>

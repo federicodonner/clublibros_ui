@@ -117,7 +117,7 @@ class AddBook extends React.Component {
                       <span className="form-input">
                         Autor:{" "}
                         <input
-                          name="email"
+                          name="autor"
                           type="text"
                           ref={this.authorRef}
                           className="pretty-input"
@@ -125,17 +125,18 @@ class AddBook extends React.Component {
                       </span>
                       <span className="form-input">
                         Resumen:{" "}
-                        <input
-                          name="email"
+                        <textarea
+                          name="resumen"
                           type="text"
                           ref={this.summaryRef}
                           className="pretty-input"
+                          rows="4"
                         />
                       </span>
                       <span className="form-input">
                         Año:{" "}
                         <input
-                          name="email"
+                          name="ano"
                           type="text"
                           ref={this.yearRef}
                           className="pretty-input"
@@ -144,7 +145,7 @@ class AddBook extends React.Component {
                       <span className="form-input">
                         Idioma:{" "}
                         <input
-                          name="email"
+                          name="idioma"
                           type="text"
                           ref={this.languageRef}
                           className="pretty-input"
@@ -165,7 +166,9 @@ class AddBook extends React.Component {
               this.state.bookAdded &&
               this.state.response.addSuccessful && (
                 <>
-                  <p>{this.state.response.bookTitle} fue agregado exitosamente.</p>
+                  <p>
+                    {this.state.response.bookTitle} fue agregado exitosamente.
+                  </p>
                   <p>
                     <a onClick={this.navigateBack()}>Volver</a>
                   </p>
