@@ -10,6 +10,7 @@ import Credits from "./Credits";
 import Redirect from "./Redirect";
 import Signup from "./Signup";
 import AddBook from "./AddBook";
+import Review from "./Review";
 import NotFound from "./NotFound";
 
 class Router extends React.Component {
@@ -29,6 +30,7 @@ class Router extends React.Component {
           <Route path="/credits" component={Credits} />
           <Route path="/signup/:id" component={Signup} />
           <Route path="/signup" component={Redirect} />
+          <Route path="/review/:id" component={Review} />
           <Route path="/addbook" component={AddBook} />
           <Route component={Home} />
         </Switch>

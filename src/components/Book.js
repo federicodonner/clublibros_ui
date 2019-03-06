@@ -9,6 +9,14 @@ class Book extends React.Component {
     book: {}
   };
 
+  writeReview = event => {
+    event.preventDefault();
+
+    this.props.history.push({
+      pathname: "/review/" + this.props.match.params.id
+    });
+  };
+
   componentDidMount() {
     // Verify if the user has logged in before
     const user = verifyLogin();
@@ -163,6 +171,14 @@ class Book extends React.Component {
                     );
                   })}
                 </ul>
+                {this.state &&
+                  this.state.book &&
+                  !this.state.book.reviewDelUsuario && (
+                    <p>
+                      Si lo leíste,{" "}
+                      <a onClick={this.writeReview}>escribí una reseña</a>
+                    </p>
+                  )}
               </>
             )}
           </div>

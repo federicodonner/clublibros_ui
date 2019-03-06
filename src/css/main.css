@@ -168,6 +168,22 @@ ul.libros li {
   width: 13%;
   margin-bottom: 18px;
 }
+
+
+.dv-star-rating{
+  font-size: 18pt;
+  left: 16px;
+  top: 10px;
+}
+
+.dv-star-rating-star{
+  margin-right: 10px;
+}
+
+.dv-star-rating-empty-star i{
+  color: white;
+}
+
 html,
 body,
 div,

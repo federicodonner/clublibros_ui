@@ -108,6 +108,19 @@ export function addBook(book, userId, token) {
   });
 }
 
+export function addReview(data, token) {
+  const url = "http://www.federicodonner.com/clublibros_api/public/api/reviews";
+  return fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate",
+      Authorization: "Bearer " + token
+    },
+    body: JSON.stringify(data)
+  });
+}
+
 // This function verifies login information in local storage
 // If not found, it navigates to userselect
 // Should be called from componentDidMount in every route
