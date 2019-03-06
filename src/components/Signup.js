@@ -35,7 +35,7 @@ class Signup extends React.Component {
               .then(response => {
                 localStorage.setItem("libroclub_token", response.token);
                 localStorage.setItem("libroclub_username", user.nombre);
-                localStorage.setItem("libroclub_id", user.id);
+                localStorage.setItem("libroclub_id", response.id);
                 this.props.history.push({ pathname: "/" });
               })
               .catch(error => console.error("Error:", error));
