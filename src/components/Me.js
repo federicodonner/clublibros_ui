@@ -55,6 +55,10 @@ class Me extends React.Component {
           .then(res => res.json())
           .then(activeUser => this.setState({ activeUser }));
       });
+    } else {
+      this.props.history.push({
+        pathname: "/companyselect"
+      });
     }
   }
   render() {
