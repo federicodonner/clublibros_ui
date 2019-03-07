@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "./Header";
 import BookName from "./BookName";
-import { verifyLogin, fetchActiveUser } from "../fetchFunctions";
+import UserName from "./UserName";
+import { verifyLogin, fetchActiveUser, enableBook } from "../fetchFunctions";
 import { convertDate } from "../dataFunctions";
 
 class Me extends React.Component {
@@ -19,6 +20,31 @@ class Me extends React.Component {
     this.props.history.push({
       pathname: "/return/" + this.state.activeUser.alquilerActivo.id_libro
     });
+  };
+
+  // Enable or disable the book
+  // Enable is a boolean that indicates if the book has to be enabled
+  // or disabled in the db
+  sendEnableBook = (enable, book_id) => event => {
+    event.preventDefault();
+    enableBook(enable, book_id, this.state.user.token)
+      .then(res => res.json())
+      .then(
+        function(response) {
+          // if the query is successful, modify the status of the book in status
+          if (response.status == "success") {
+            const activeUser = this.state.activeUser;
+            activeUser.libros.forEach(function(libro, index) {
+              if (libro.id == book_id) {
+                libro.activo = enable ? 1 : 0;
+              }
+            });
+            this.setState({ activeUser });
+          } else {
+            alert("Hubo un error, inténtalo denuevo más tarde");
+          }
+        }.bind(this)
+      );
   };
 
   componentDidMount() {
@@ -90,18 +116,44 @@ class Me extends React.Component {
                                 navigation={this.props.history}
                               />{" "}
                               - {obj.autor}
-                              {obj.activo == 1 && (
+                              {obj.activo == 1 && !obj.alquilerActivo && (
                                 <span className="newLine">
-                                  <a>Sacarlo de Libroclub</a>
+                                  <a
+                                    onClick={this.sendEnableBook(false, obj.id)}
+                                  >
+                                    Sacarlo de Libroclub
+                                  </a>
                                 </span>
                               )}
-                              {obj.activo != 1 && (
+                              {obj.activo != 1 && !obj.alquilerActivo && (
                                 <>
                                   <span className="newLine">
                                     Este libro no está disponible.{" "}
                                   </span>
                                   <span className="newLine">
-                                    <a>Volver a traerlo</a>
+                                    <a
+                                      onClick={this.sendEnableBook(
+                                        true,
+                                        obj.id
+                                      )}
+                                    >
+                                      Volver a traerlo
+                                    </a>
+                                  </span>
+                                </>
+                              )}
+                              {obj.activo == 1 && obj.alquilerActivo && (
+                                <>
+                                  <span className="newLine">
+                                    Este libro está alquilado, lo tiene{" "}
+                                    <UserName
+                                      id={obj.alquilerActivo.detallesUsuario.id}
+                                      name={
+                                        obj.alquilerActivo.detallesUsuario
+                                          .nombre
+                                      }
+                                      navigation={this.props.history}
+                                    />{" "}
                                   </span>
                                 </>
                               )}

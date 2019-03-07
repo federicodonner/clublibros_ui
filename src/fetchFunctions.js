@@ -149,6 +149,23 @@ export function returnBook(book_id, token) {
   });
 }
 
+export function enableBook(enable, book_id, token) {
+  const enableText = enable ? "enable" : "disable";
+  const url =
+    "http://www.federicodonner.com/clublibros_api/public/api/libros/" +
+    book_id +
+    "?operation=" +
+    enableText;
+  return fetch(url, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      "accept-encoding": "gzip, deflate",
+      Authorization: "Bearer " + token
+    }
+  });
+}
+
 // This function verifies login information in local storage
 // If not found, it navigates to userselect
 // Should be called from componentDidMount in every route
