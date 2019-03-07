@@ -14,6 +14,13 @@ class Me extends React.Component {
     this.props.history.push({ pathname: "/addbook" });
   };
 
+  goToReturn = event => {
+    event.preventDefault();
+    this.props.history.push({
+      pathname: "/return/" + this.state.activeUser.alquilerActivo.id_libro
+    });
+  };
+
   componentDidMount() {
     const user = verifyLogin();
     if (user) {
@@ -44,6 +51,30 @@ class Me extends React.Component {
                   historial de alquileres.
                 </p>
                 <img className="separador" src="/images/separador.png" />
+                {this.state &&
+                  this.state.activeUser &&
+                  this.state.activeUser.alquilerActivo && (
+                    <>
+                      <p className="titulo">Alquiler activo:</p>
+                      <p>
+                        Tenés{" "}
+                        <BookName
+                          id={this.state.activeUser.alquilerActivo.id_libro}
+                          name={
+                            this.state.activeUser.alquilerActivo.nombre_libro
+                          }
+                          navigation={this.props.history}
+                        />{" "}
+                        desde{" "}
+                        {convertDate(
+                          this.state.activeUser.alquilerActivo.fecha_salida
+                        )}
+                        . Si ya lo terminaste,{" "}
+                        <a onClick={this.goToReturn}>devolvelo</a>.
+                      </p>
+                      <img className="separador" src="/images/separador.png" />
+                    </>
+                  )}
                 {this.state &&
                   this.state.activeUser &&
                   this.state.activeUser.libros.length > 0 && (
