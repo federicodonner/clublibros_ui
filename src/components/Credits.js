@@ -4,7 +4,6 @@ import Header from "./Header";
 class Credits extends React.Component {
   return = () => event => {
     event.preventDefault();
-    console.log(this.props.history);
     this.props.history.goBack() || this.props.history.push('/');
   };
 
