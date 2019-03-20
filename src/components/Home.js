@@ -65,7 +65,7 @@ class Home extends React.Component {
           {this.state && this.state.user && (
             <Header
               logoType="blackLogo"
-              withGradient={true}
+              withGradient={false}
               withGreeting={true}
               username={this.state.user.username}
             />
