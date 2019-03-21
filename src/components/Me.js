@@ -8,7 +8,8 @@ import { convertDate } from "../dataFunctions";
 class Me extends React.Component {
   state: {
     user: {},
-    activeUser: {}
+    activeUser: {},
+    loading: true
   };
 
   addBook = () => event => {
@@ -33,6 +34,8 @@ class Me extends React.Component {
   // or disabled in the db
   sendEnableBook = (enable, book_id) => event => {
     event.preventDefault();
+    const loading = true;
+    this.setState({ loading });
     enableBook(enable, book_id, this.state.user.token)
       .then(res => res.json())
       .then(
@@ -45,7 +48,13 @@ class Me extends React.Component {
                 libro.activo = enable ? 1 : 0;
               }
             });
-            this.setState({ activeUser });
+            this.setState(
+              { activeUser },
+              function() {
+                const loading = false;
+                this.setState({ loading });
+              }.bind(this)
+            );
           } else {
             alert("Hubo un error, inténtalo denuevo más tarde");
           }
@@ -54,12 +63,22 @@ class Me extends React.Component {
   };
 
   componentDidMount() {
+    const loading = true;
+    this.setState({ loading });
     const user = verifyLogin();
     if (user) {
       this.setState({ user }, function() {
         fetchActiveUser(this.state.user.token)
           .then(res => res.json())
-          .then(activeUser => this.setState({ activeUser }));
+          .then(activeUser =>
+            this.setState(
+              { activeUser },
+              function() {
+                const loading = false;
+                this.setState({ loading });
+              }.bind(this)
+            )
+          );
       });
     } else {
       this.props.history.push({
@@ -75,12 +94,12 @@ class Me extends React.Component {
             <Header withGreeting={true} username={this.state.user.username} />
           )}
           <div className="content">
-            {this.state && !this.state.activeUser && (
+            {this.state && (!this.state.activeUser || this.state.loading) && (
               <p>
                 <img className="loader" src="/images/loader.gif" />
               </p>
             )}
-            {this.state && this.state.activeUser && (
+            {this.state && this.state.activeUser && !this.state.loading && (
               <>
                 <p>
                   En esta sección podés administrar tus libros y ver tu
@@ -206,10 +225,10 @@ class Me extends React.Component {
                       </ul>
                     </>
                   )}
-                  <img className="separador" src="/images/separador.png" />
-                  <p>
-                    <a onClick={this.signOut}>Salir de Libroclub</a>
-                  </p>
+                <img className="separador" src="/images/separador.png" />
+                <p>
+                  <a onClick={this.signOut}>Salir de Libroclub</a>
+                </p>
               </>
             )}
           </div>

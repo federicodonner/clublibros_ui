@@ -1,12 +1,13 @@
 import React from "react";
 import Header from "./Header";
 import UserName from "./UserName";
-import { verifyLogin, fetchBook } from "../fetchFunctions";
+import { verifyLogin, fetchBook, enableBook } from "../fetchFunctions";
 
 class Book extends React.Component {
   state: {
     user: {},
-    book: {}
+    book: {},
+    loading: true
   };
 
   writeReview = event => {
@@ -24,15 +25,57 @@ class Book extends React.Component {
     });
   };
 
+  // Enable or disable the book
+  // Enable is a boolean that indicates if the book has to be enabled
+  // or disabled in the db
+  sendEnableBook = (enable, book_id) => event => {
+    event.preventDefault();
+    const loading = true;
+    this.setState({ loading });
+    enableBook(enable, book_id, this.state.user.token)
+      .then(res => res.json())
+      .then(
+        function(response) {
+          // if the query is successful, modify the status of the book in status
+          if (response.status == "success") {
+            const book = this.state.book;
+            enable ? (book.activo = "1") : (book.activo = "0");
+
+            this.setState(
+              { book },
+              function() {
+                const loading = false;
+                this.setState({ loading });
+              }.bind(this)
+            );
+          } else {
+            alert("Hubo un error, inténtalo denuevo más tarde");
+            const loading = false;
+            this.setState({ loading });
+          }
+        }.bind(this)
+      );
+  };
+
   componentDidMount() {
     // Verify if the user has logged in before
+    const loading = true;
+    this.setState({ loading });
     const user = verifyLogin();
     if (user) {
       // If it has, store the information in state
       this.setState({ user }, function() {
         fetchBook(this.state.user.token, this.props.match.params.id)
           .then(res => res.json())
-          .then(book => this.setState({ book }));
+          .then(book =>
+            this.setState(
+              { book },
+              function() {
+                const loading = false;
+                this.setState({ loading });
+              }.bind(this)
+            )
+          );
       });
 
       // this.setState({ user }, function() {
@@ -67,12 +110,12 @@ class Book extends React.Component {
             />
           )}
           <div className="content">
-            {this.state && !this.state.book && (
+            {this.state && (!this.state.book || this.state.loading) && (
               <p>
                 <img className="loader" src="/images/loader.gif" />
               </p>
             )}
-            {this.state && this.state.book && (
+            {this.state && this.state.book && !this.state.loading && (
               <>
                 <p>
                   {this.state.book.titulo} - {this.state.book.autor} -{" "}
@@ -97,7 +140,8 @@ class Book extends React.Component {
                 {this.state &&
                   this.state.book &&
                   !this.state.book.alquilerActivo &&
-                  this.state.book.usr_dueno != this.state.user.user_id && !this.state.book.usuarioTieneAlquiler && (
+                  this.state.book.usr_dueno != this.state.user.user_id &&
+                  !this.state.book.usuarioTieneAlquiler && (
                     <>
                       <img className="separador" src="/images/separador.png" />
                       <p>
@@ -119,7 +163,8 @@ class Book extends React.Component {
                           id={this.state.book.alquilerActivo.id_usuario}
                           name={this.state.book.alquilerActivo.nombre}
                           navigation={this.props.history}
-                        />.
+                        />
+                        .
                       </p>
                     </>
                   )}
@@ -140,13 +185,45 @@ class Book extends React.Component {
                 {this.state &&
                   this.state.book &&
                   !this.state.book.alquilerActivo &&
+                  this.state.book.activo == "1" &&
                   this.state.book.usr_dueno == this.state.user.user_id && (
                     <>
                       <img className="separador" src="/images/separador.png" />
                       <p>
                         Este libro es tuyo y está disponible.
                         <span className="newLine">
-                          <a href="#">Quiero sacarlo de libroclub.</a>
+                          <a
+                            onClick={this.sendEnableBook(
+                              false,
+                              this.state.book.id
+                            )}
+                          >
+                            Quiero sacarlo de libroclub.
+                          </a>
+                        </span>
+                      </p>
+                    </>
+                  )}
+
+                {this.state &&
+                  this.state.book &&
+                  !this.state.book.alquilerActivo &&
+                  this.state.book.activo == "0" &&
+                  this.state.book.usr_dueno == this.state.user.user_id && (
+                    <>
+                      <img className="separador" src="/images/separador.png" />
+                      <p>
+                        Este libro es tuyo y está disponible pero lo retiraste
+                        de Libroclub.
+                        <span className="newLine">
+                          <a
+                            onClick={this.sendEnableBook(
+                              true,
+                              this.state.book.id
+                            )}
+                          >
+                            Volver a traerlo.
+                          </a>
                         </span>
                       </p>
                     </>
