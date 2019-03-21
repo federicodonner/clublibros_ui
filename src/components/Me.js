@@ -22,6 +22,12 @@ class Me extends React.Component {
     });
   };
 
+  signOut = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push({ pathname: "/companyselect" });
+  };
+
   // Enable or disable the book
   // Enable is a boolean that indicates if the book has to be enabled
   // or disabled in the db
@@ -200,6 +206,10 @@ class Me extends React.Component {
                       </ul>
                     </>
                   )}
+                  <img className="separador" src="/images/separador.png" />
+                  <p>
+                    <a onClick={this.signOut}>Salir de Libroclub</a>
+                  </p>
               </>
             )}
           </div>

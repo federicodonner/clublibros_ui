@@ -33,6 +33,12 @@ class Home extends React.Component {
     });
   };
 
+  signOut = event => {
+    event.preventDefault();
+    localStorage.clear();
+    this.props.history.push({ pathname: "/companyselect" });
+  };
+
   componentDidMount() {
     // Verify if the user has logged in before
     const user = verifyLogin();
@@ -168,6 +174,10 @@ class Home extends React.Component {
                     {" "}
                     Ver mis{" "}
                     <a onClick={this.goToPersonalDetails}>datos personales</a>
+                  </p>
+                  <img className="separador" src="/images/separador.png" />
+                  <p>
+                    <a onClick={this.signOut}>Salir de Libroclub</a>
                   </p>
                 </>
               )}
