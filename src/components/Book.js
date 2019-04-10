@@ -12,7 +12,8 @@ class Book extends React.Component {
   state: {
     user: {},
     book: {},
-    loading: true
+    loading: true,
+    cover: ""
   };
 
   writeReview = event => {
@@ -84,7 +85,7 @@ class Book extends React.Component {
                 )
                   .then(res => res.json())
                   .then(response =>
-                    console.log(response.items[0].pagemap.scraped[0].image_link)
+                    this.setState({ cover: response.items[0].link })
                   );
               }.bind(this)
             )
@@ -149,6 +150,8 @@ class Book extends React.Component {
                       </span>
                     )}
                 </p>
+
+                <img className="bookCover" src={this.state.cover} />
 
                 <p>{this.state.book.resumen}</p>
 

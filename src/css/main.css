@@ -112,6 +112,14 @@ ul.libros li {
   font-weight: 600;
 }
 
+.bookCover {
+  width: 36vw;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 27px;
+}
+
 .hidden {
   display: none;
 }
