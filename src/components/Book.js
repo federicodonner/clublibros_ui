@@ -1,7 +1,12 @@
 import React from "react";
 import Header from "./Header";
 import UserName from "./UserName";
-import { verifyLogin, fetchBook, enableBook } from "../fetchFunctions";
+import {
+  verifyLogin,
+  fetchBook,
+  enableBook,
+  getBookCover
+} from "../fetchFunctions";
 
 class Book extends React.Component {
   state: {
@@ -73,6 +78,14 @@ class Book extends React.Component {
               function() {
                 const loading = false;
                 this.setState({ loading });
+                // Get the book cover image
+                getBookCover(
+                  this.state.book.titulo + " " + this.state.book.autor
+                )
+                  .then(res => res.json())
+                  .then(response =>
+                    console.log(response.items[0].pagemap.scraped[0].image_link)
+                  );
               }.bind(this)
             )
           );
@@ -96,6 +109,8 @@ class Book extends React.Component {
         //state: { prueba: "hoooola" }
       });
     }
+
+    //getBookCover('daniel pink drive').then(res => res.json()).then(response => console.log(response.items[0].pagemap.scrapped[0].image_link));
   }
 
   render() {

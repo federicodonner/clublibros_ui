@@ -166,6 +166,17 @@ export function enableBook(enable, book_id, token) {
   });
 }
 
+export function getBookCover(bookName) {
+  const formattedBookName = bookName.replace(/\s/g, "+");
+  var url =
+    "https://www.googleapis.com/customsearch/v1?key=AIzaSyBiRqnIECMCs9LKRyf_CD8795BRc7Bpbzg&cx=009973845365108789937:h0kxgycmpmu&q=" +
+    formattedBookName +
+    "+book+cover";
+  return fetch(url, {
+    method: "GET"
+  });
+}
+
 // This function verifies login information in local storage
 // If not found, it navigates to userselect
 // Should be called from componentDidMount in every route

@@ -168,18 +168,17 @@ ul.libros li {
   max-width: 70px;
 }
 
-
-.dv-star-rating{
+.dv-star-rating {
   font-size: 18pt;
   left: 16px;
   top: 10px;
 }
 
-.dv-star-rating-star{
+.dv-star-rating-star {
   margin-right: 10px;
 }
 
-.dv-star-rating-empty-star i{
+.dv-star-rating-empty-star i {
   color: white;
 }
 
@@ -307,6 +306,9 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   box-sizing: border-box;
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .wrapper {
