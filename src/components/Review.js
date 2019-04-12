@@ -9,7 +9,7 @@ class Review extends React.Component {
     user: {},
     rating: 0,
     book: {},
-    userEnteredReview:false
+    userEnteredReview: false
   };
 
   return = event => {
@@ -35,7 +35,9 @@ class Review extends React.Component {
       .then(
         function(respuesta) {
           if (respuesta.status == "success") {
-            this.props.history.push({ pathname: "/book/" + this.state.book.id });
+            this.props.history.push({
+              pathname: "/book/" + this.state.book.id
+            });
           } else {
             alert("Ocurrió un error, intenta nuevamente más tarde.");
           }
@@ -78,7 +80,14 @@ class Review extends React.Component {
     return (
       <div className="app-view cover">
         <div className="scrollable">
-          <Header withGradient={false} />
+          {this.state && this.state.user && (
+            <Header
+              withGradient={false}
+              withGreeting={true}
+              username={this.state.user.username}
+            />
+          )}
+
           <div className="content">
             <div>
               {this.state && this.state.loading && (
