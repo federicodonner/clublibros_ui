@@ -106,7 +106,7 @@ class AddBook extends React.Component {
                   <>
                     <form className="pretty-form" onSubmit={this.addBook}>
                       <span className="form-input">
-                        Título:{" "}
+                        <span class='label'>Titulo:</span>
                         <input
                           name="nombre"
                           type="text"
@@ -115,7 +115,7 @@ class AddBook extends React.Component {
                         />
                       </span>
                       <span className="form-input">
-                        Autor:{" "}
+                        <span class='label'>Autor:</span>
                         <input
                           name="autor"
                           type="text"
@@ -124,7 +124,7 @@ class AddBook extends React.Component {
                         />
                       </span>
                       <span className="form-input">
-                        Resumen:{" "}
+                        <span class='label'>Resumen:</span>
                         <textarea
                           name="resumen"
                           type="text"
@@ -134,7 +134,7 @@ class AddBook extends React.Component {
                         />
                       </span>
                       <span className="form-input">
-                        Año:{" "}
+                        <span class='label'>Año:</span>
                         <input
                           name="ano"
                           type="text"
@@ -143,7 +143,7 @@ class AddBook extends React.Component {
                         />
                       </span>
                       <span className="form-input">
-                        Idioma:{" "}
+                        <span class='label'>Idioma:</span>
                         <input
                           name="idioma"
                           type="text"

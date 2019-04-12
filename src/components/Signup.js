@@ -76,7 +76,7 @@ class Signup extends React.Component {
               {this.state && !this.state.loading && (
                 <form className="pretty-form" onSubmit={this.signupUser}>
                   <span className="form-input">
-                    Nombre:{" "}
+                    <span class='label'>Nombre:</span>
                     <input
                       name="nombre"
                       type="text"
@@ -85,7 +85,7 @@ class Signup extends React.Component {
                     />
                   </span>
                   <span className="form-input">
-                    Email:{" "}
+                    <span class='label'>Email:</span>
                     <input
                       name="email"
                       type="text"

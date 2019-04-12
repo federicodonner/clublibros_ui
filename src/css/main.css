@@ -124,21 +124,6 @@ ul.libros li {
   display: none;
 }
 
-.prettyForm {
-  color: white;
-  font-weight: 600;
-  margin-bottom: 30px;
-}
-
-.prettyForm .formField {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.prettyForm input {
-  width: 55%;
-}
-
 .newLine {
   display: block;
 }
@@ -151,7 +136,7 @@ ul.libros li {
 .pretty-form {
   margin-bottom: 30px;
   margin-left: 17px;
-  text-align: right;
+  text-align: left;
 }
 
 .pretty-form .form-input {
@@ -159,20 +144,25 @@ ul.libros li {
   margin-bottom: 10px;
   color: white;
   font-weight: 600;
-  margin-right: 18vw;
-  align-self: right;
+  margin-left: 13vw;
 }
 
 .pretty-form .form-input .pretty-input {
   padding: 5px;
   font-size: 10pt;
-  width: 70%;
+  width: 83%;
+}
+
+.pretty-form .form-input .label {
+  display: block;
 }
 
 .pretty-form .pretty-submit {
   font-weight: 600;
   font-size: 12pt;
-  margin-right: 42vw;
+  color: white;
+  margin-left: 36vw;
+  margin-top: 2vh;
 }
 
 .separador {
