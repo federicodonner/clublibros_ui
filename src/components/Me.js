@@ -105,7 +105,6 @@ class Me extends React.Component {
                   En esta sección podés administrar tus libros y ver tu
                   historial de alquileres.
                 </p>
-                <img className="separador" src="/images/separador.png" />
                 {this.state &&
                   this.state.activeUser &&
                   this.state.activeUser.alquilerActivo && (
