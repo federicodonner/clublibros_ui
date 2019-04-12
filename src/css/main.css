@@ -3,19 +3,20 @@ body {
 }
 
 .scrollable {
-  background-image: url("/images/bgpattern.jpg");
-  background-repeat-y: repeat;
-  background-repeat-x: no-repeat;
-  background-size: contain;
+  background-image: url(/images/bgpattern.jpg);
+  background-size: ;
   background-attachment: local;
-  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  box-sizing: border-box;
+  background-size: 440px;
+  background-repeat: repeat;
 }
 
 .header {
-  background-repeat: no-repeat;
-  width: 100%;
-  text-align: center;
-  padding-top: 7%;
+  border-bottom: solid 1px white;
   margin-bottom: 30px;
 }
 
@@ -24,12 +25,13 @@ body {
 }
 
 .logo {
-  width: 38%;
+  width: 200px;
   background-size: contain;
   background-repeat: no-repeat;
   position: relative;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 11px;
+  margin-top: 11px;
+  display: inline-block;
 }
 
 .blackLogo {
@@ -42,13 +44,17 @@ body {
 
 .whiteGreeting {
   color: white;
+  display: inline-block;
+  position: relative;
+  bottom: 5px;
+  left: 37px;
 }
 
 .logo:before {
   content: "";
   display: block;
   height: 0;
-  padding-bottom: 27%;
+  padding-bottom: 22%;
 }
 
 .blue {
@@ -56,17 +62,12 @@ body {
 }
 
 .content {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
 }
 
 .content p {
   color: white;
   font-weight: 600;
-  padding-left: 6%;
-  padding-right: 6%;
+  padding-left: 16px;
   margin-bottom: 30px;
 }
 .content p .reviewText {
@@ -113,11 +114,10 @@ ul.libros li {
 }
 
 .bookCover {
-  width: 35%;
+  width: 140px;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 27px;
+  margin-left: 16px;
 }
 
 .hidden {
@@ -144,11 +144,14 @@ ul.libros li {
 }
 
 .loader {
-  margin-top: 50%;
+  margin-top: 0%;
+  margin-left: 20%;
 }
 
 .pretty-form {
   margin-bottom: 30px;
+  margin-left: 17px;
+  text-align: right;
 }
 
 .pretty-form .form-input {
@@ -156,24 +159,28 @@ ul.libros li {
   margin-bottom: 10px;
   color: white;
   font-weight: 600;
+  margin-right: 18vw;
+  align-self: right;
 }
 
 .pretty-form .form-input .pretty-input {
   padding: 5px;
   font-size: 10pt;
-  width: 55%;
+  width: 70%;
 }
 
 .pretty-form .pretty-submit {
-  color: #c1c1c2;
   font-weight: 600;
   font-size: 12pt;
+  margin-right: 42vw;
 }
 
 .separador {
   width: 13%;
   margin-bottom: 18px;
   max-width: 70px;
+  margin-left: 58px;
+  display: block;
 }
 
 .dv-star-rating {
@@ -307,18 +314,6 @@ body {
   box-sizing: border-box;
 }
 
-.scrollable {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  box-sizing: border-box;
-  max-width: 650px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
 .wrapper {
   width: 100%;
   max-width: 600px;
@@ -343,225 +338,95 @@ body {
   transform: translate3d(0, 0, 0);
   transition: transform 450ms ease-out, opacity 400ms ease-out;
 }
-/* Image */
-.image {
-  background: no-repeat center/cover;
-  position: relative;
-}
-
-/* .image:before {
-content: "";
-display: block;
-width: 100%;
-height: 0;
-padding-bottom: 100%;
-} */
-
-.image.landscape:before {
-  padding-bottom: 75%;
-}
-
-.image-contain {
-  background-size: contain !important;
-}
-
-.loader-white::after {
-  content: "";
-  display: none;
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -20px;
-  margin-left: -20px;
-  background-size: 40px 40px;
-  background-repeat: no-repeat;
-  /* background-image: url(../images/loader_white.jpg); */
-}
-
-.image.loading::after {
-  display: block;
-  -webkit-animation: rotate 1s linear infinite;
-  animation: rotate 1s linear infinite;
-}
-
-/* MI CSS */
-
-.scrollable .footer .green {
-  background-color: #00b1ad;
-  width: 100%;
-  height: 44px;
-  color: white;
-  font-size: 8pt;
-  font-weight: bold;
-}
-
-.scrollable .footer .green .copyright {
-  float: right;
-  margin-top: 24px;
-  margin-right: 10px;
-}
-
-.banner-footer {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  margin-bottom: 5px;
-}
-
-.title {
-  margin-bottom: 20px;
-}
-
-.paragraph {
-}
-
-.product_item {
-  display: inline-block;
-  margin-right: 30px;
-}
-
-.product_image {
-  width: 180px;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.product_image:before {
-  content: "";
-  display: block;
-  height: 0;
-  padding-bottom: 76%;
-}
-
-.section-title {
-  font-size: 18pt;
-  margin-bottom: 12px;
-  color: #00928f;
-}
-
-.banner {
-  width: 100%;
-  height: 148px;
-}
-
-.lista li {
-  margin: 0 0 5px 0;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-@keyframes bounce {
-  0%,
-  100% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1);
-  }
-}
-
-.map {
-  width: 300px;
-  height: 200px;
-}
-
-.logo-liceo {
-  width: 40px;
-  height: 40px;
-  display: inline;
-  float: left;
-  margin-right: 14px;
-}
-
-.foto-liceo {
-  width: 300px;
-  height: 200px;
-  display: inline;
-  float: left;
-  margin-right: 30px;
-}
-
-.form-label {
-  display: block;
-}
-
-.styled-form {
-  border: solid #00b1ad 1px;
-  padding: 5px;
-  margin-left: 10px;
-  font-size: 10pt;
-  display: block;
-  margin-bottom: 10px;
-}
-
-#contact-form {
-  margin-top: 10px;
-}
-
-.form-submit {
-  position: relative;
-  left: 290px;
-  font-size: 13pt;
-  top: 10px;
-  padding: 2px 4px 2px 4px;
-}
-
-.menu a {
-  display: none;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-  font-size: 17px;
-  position: absolute;
-  right: 10px;
-  top: -7px;
-}
-
-.responsive-menu {
-  display: none;
-}
-
-.responsive-button {
-  display: block !important;
-  margin-left: 153px;
-}
-
-.hide-button {
-  display: none !important;
-}
 
 /* RESPONSIVE */
-@media only screen and (max-width: 1000px) {
-  .responsive-centrable {
+@media only screen and (max-width: 800px) {
+  .logo {
+    width: 38%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .scrollable {
+    background-image: url("/images/bgpattern.jpg");
+    background-repeat-y: repeat;
+    background-repeat-x: no-repeat;
+    background-size: contain;
+    background-attachment: local;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box;
+  }
+
+  .header {
+    background-repeat: no-repeat;
+    width: 100%;
+    text-align: center;
+    padding-top: 7%;
+    margin-bottom: 30px;
+    border-bottom: none;
+  }
+
+  .content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     text-align: center;
   }
 
-  .section-title {
-    text-align: left;
+  .whiteGreeting {
+    color: white;
+    display: block;
+    position: relative;
+    bottom: 0px;
+    left: 0px;
   }
 
-  .menu {
-    width: 100%;
+  .logo:before {
+    content: "";
+    display: block;
+    height: 0;
+    padding-bottom: 27%;
   }
 
-  .responsive-hide {
-    display: none !important;
+  .bookCover {
+    width: 35%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 27px;
   }
 
-  .responsive-show {
-    display: inline !important;
+  .content p {
+    color: white;
+    font-weight: 600;
+    padding-left: 6%;
+    padding-right: 6%;
+    margin-bottom: 30px;
   }
 
-  .form-submit {
-    left: 0;
+  .separador {
+    width: 13%;
+    margin-bottom: 18px;
+    max-width: 70px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pretty-form {
+    margin-bottom: 30px;
+    margin-left: 0px;
+  }
+
+  .loader {
+    margin-top: 50%;
+    margin-left: 0%;
   }
 }
